@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Attachment Download Demo</title>
+    </head>
+    <body>
+        <h1>Attachment Demo</h1>
+        <h3>Public file Download</h3>
+        <a href="/public.pdf" download="">Download PDF</a>
+
+        <h3>Private file download</h3>
+        <button id="downloadPdf">Click to download</button>
+
+        <script type="text/javascript">
+            downloadPdf.addEventListener("click", (event) => {
+                const request = new XMLHttpRequest();
+                request.open("GET", "/download-private-attachment");
+                request.setRequestHeader("X-Token", "random-value");
+
+                request.onreadystatechange = () => {
+                    if (request.readyState === XMLHttpRequest.DONE) {
+                        // Request finished. Do processing here.
+                        if (request.status === 200) {
+                            // handle success
+                            saveFile(request.response);
+                        } else {
+                            alert("Error! Couldn't download file.")
+                        }
+                    }
+                }
+
+                request.send();
+            })
+
+            async function saveFile(binaryData) {
+                try {
+                    const blob = new Blob([binaryData], { type: "application/pdf" });
+                    const a = document.createElement("a");
+                    document.body.appendChild(a);
+                    const blobUrl = URL.createObjectURL(blob);
+                    
+                    a.href=blobUrl;
+                    a.download="private.pdf";
+                    a.click();
+
+                    URL.revokeObjectURL(blobUrl);
+                    document.body.removeChild(a);
+                } catch (error) {
+                    console.log(`Error while saving file :: ${error}`);
+                }
+            }
+        </script>
+    </body>
+</html>
