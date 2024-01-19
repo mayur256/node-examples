@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 
 // Demo routes
 app.get("/", (req, res) => {
-    res.json("Hello, World!\n");
+    res.json({ message: "Hello World" });
 });
 
 // listening to app
