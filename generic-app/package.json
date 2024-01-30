@@ -1,0 +1,20 @@
+{
+  "name": "generic-app",
+  "version": "1.0.0",
+  "description": "A generic app that will be used for various demonstrations",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=production node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "author": "Mayur",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
